@@ -7,6 +7,10 @@ const movies = require("./movies");
 const exampleMovies = require("./movies");
 // Do not change the line above.
 
+/*
+ * MAP PROBLEMS
+ */
+
 /**
  * getAllMovieTitles()
  * -----------------------------
@@ -40,6 +44,10 @@ const getAllMovieTitlesAlt = function (movies) {
   return movies.map(getMovieTitle);
 };
 
+/*
+ * REDUCE PROBLEMS
+ */
+
 /**
  * getHighestMetascore()
  * -----------------------------
@@ -52,7 +60,7 @@ const getAllMovieTitlesAlt = function (movies) {
  *  //> 96
  */
 function getHighestMetascore(movies) {
-  return movies.reduce(
+  return movies. (
     (highest, movie) =>
       Number(movie.metascore) > highest ? Number(movie.metascore) : highest,
     0
@@ -101,6 +109,38 @@ const countByRating = (movies) => {
 };
 
 /**
+ * getBiggestBoxOfficeMovie()
+ * -----------------------------
+ * Returns the name of the movie with the highest `boxOffice` amount.
+ * @param {Object[]} movies - An array of movies. See the `movies.js` file for an example of this array.
+ * @returns {string} The name of the movie that made the most money at the box office.
+ *
+ * EXAMPLE:
+ *  getBiggestBoxOfficeMovie(movies);
+ *  //> "Incredibles 2"
+ */
+const convertBoxOfficeToNumber = (movie) => {
+  return Number(movie.boxOffice.replaceAll("$", "").replaceAll(",", ""));
+};
+
+function getBiggestBoxOfficeMovie(movies) {
+  const biggestBoxOfficeMovie = movies.reduce(
+    (biggest, movie) =>
+      convertBoxOfficeToNumber(movie) > convertBoxOfficeToNumber(biggest)
+        ? movie
+        : biggest,
+    movies[0]
+  );
+
+  return biggestBoxOfficeMovie ? biggestBoxOfficeMovie.title : null;
+}
+
+
+/**
+ * FIND PROBLEMS
+ */
+
+/**
  * findById()
  * -----------------------------
  * Returns a movie object from an array of objects based on the ID. If the inputted `movies` array is empty or the ID does not match any movie, return `null`.
@@ -117,6 +157,10 @@ const countByRating = (movies) => {
 const findById = (movies, id) => {
   return movies.find((movie) => movie.imdbID === id) || null;
 };
+
+/**
+ * FILTER PROBLEMS
+ */
 
 /**
  * filterByGenre()
@@ -179,33 +223,6 @@ const filterByGenre = (movies, genre) => {
 const getAllMoviesReleasedAtOrBeforeYear = (movies, year) => {
   return movies.filter((movie) => Number(movie.released.slice(-4)) <= year);
 };
-
-/**
- * getBiggestBoxOfficeMovie()
- * -----------------------------
- * Returns the name of the movie with the highest `boxOffice` amount.
- * @param {Object[]} movies - An array of movies. See the `movies.js` file for an example of this array.
- * @returns {string} The name of the movie that made the most money at the box office.
- *
- * EXAMPLE:
- *  getBiggestBoxOfficeMovie(movies);
- *  //> "Incredibles 2"
- */
-const convertBoxOfficeToNumber = (movie) => {
-  return Number(movie.boxOffice.replaceAll("$", "").replaceAll(",", ""));
-};
-
-function getBiggestBoxOfficeMovie(movies) {
-  const biggestBoxOfficeMovie = movies.reduce(
-    (biggest, movie) =>
-      convertBoxOfficeToNumber(movie) > convertBoxOfficeToNumber(biggest)
-        ? movie
-        : biggest,
-    movies[0]
-  );
-
-  return biggestBoxOfficeMovie ? biggestBoxOfficeMovie.title : null;
-}
 
 // Do not change anything below this line.
 module.exports = {
