@@ -33,14 +33,25 @@ const exampleSongData = require("./data/songs");
       "James and the Giant Peach",
     ];
  */
-function getAllMovieTitles(movies) {}
+const getAllMovieTitles = (movies) => {
+  if( !movies.length ){ 
+    return []
+    throw ERROR
+  }
+    
+  try{
+    return movies.map(movie => movie.title)
+  } catch( ERROR ) {
+     console.log(ERROR)
+  }
+}
 
 /**
  * Returns an array of all of the song titles.
  * @param {Object[]} songs - An array of songs. See the song data for more.
  * @returns {string[]} An array of strings, all of which are song titles.
  */
-function getSongTitles(songs) {}
+const getSongTitles = (songs) => songs.map(song => song.title)
 
 /**
  * Returns an array of all of the song titles with the artist.
