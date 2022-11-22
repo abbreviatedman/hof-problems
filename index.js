@@ -33,7 +33,7 @@ const exampleSongData = require("./data/songs");
       "James and the Giant Peach",
     ];
  */
-function getAllMovieTitlesAlt(movies) {}
+function getAllMovieTitles(movies) {}
 
 /**
  * Returns an array of all of the song titles.

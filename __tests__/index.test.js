@@ -9,7 +9,7 @@ const {
   getBiggestBoxOfficeMovie,
 } = require("..");
 
-const movies = require("../movies");
+const movies = require("../data/movies");
 const alternative = require("./fixtures/alternative-movies");
 
 describe("getAllMovieTitles()", () => {
