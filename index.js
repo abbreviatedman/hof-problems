@@ -1,11 +1,11 @@
 /*
-  Do not change the line below. If you'd like to run code from this file, you may use the `exampleMovies` variable below to gain access to an array of movies.
+  Do not change the line below. If you'd like to run code from this file, you may use the `exampleMovies` and `exampleSongData` variables below to gain access to arrays of movies or songs.
 
-  Keep in mind that your functions must still have and use a parameter for accepting all movies.
+  Keep in mind that your functions must still have and use a parameter for accepting all movies or songs.
 */
-const movies = require("./movies");
-const exampleMovies = require("./movies");
-// Do not change the line above.
+const exampleMovies = require("./data/movies");
+const exampleSongData = require("./data/songs");
+// Do not change the lines above.
 
 /*
  * MAP PROBLEMS
@@ -33,112 +33,61 @@ const exampleMovies = require("./movies");
       "James and the Giant Peach",
     ];
  */
-const getAllMovieTitles = (movies) => movies.map((movie) => movie.title);
-
-// alternate, more explicit version
-const getMovieTitle = function (movie) {
-  return movie.title;
-};
-
-const getAllMovieTitlesAlt = function (movies) {
-  return movies.map(getMovieTitle);
-};
-
-/*
- * REDUCE PROBLEMS
- */
+function getAllMovieTitlesAlt(movies) {}
 
 /**
- * getHighestMetascore()
- * -----------------------------
- * Returns the highest `metascore` among all movies. If the inputted `movies` array is empty, return `0`.
- * @param {Object[]} movies - An array of movies. See the `movies.js` file for an example of this array.
- * @returns {number} The highest `metascore` of all movies.
- *
- * EXAMPLE:
- *  getHighestMetascore(movies);
- *  //> 96
+ * Returns an array of all of the song titles.
+ * @param {Object[]} songs - An array of songs. See the song data for more.
+ * @returns {string[]} An array of strings, all of which are song titles.
  */
-function getHighestMetascore(movies) {
-  return movies. (
-    (highest, movie) =>
-      Number(movie.metascore) > highest ? Number(movie.metascore) : highest,
-    0
-  );
-}
+function getSongTitles(songs) {}
 
 /**
- * getAverageIMDBRating()
- * -----------------------------
- * Averages all of the IMDB ratings from all movies and returns it, as a number. If the inputted `movies` array is empty, return `0`.
- * @param {Object[]} movies - An array of movies. See the `movies.js` file for an example of this array.
- * @returns {number} The average IMDB rating across all movies.
+ * Returns an array of all of the song titles with the artist.
+ * @param {Object[]} songs - An array of songs. See the song data for more.
+ * @returns {string[]} An array of strings, all of which are in the format "<TITLE> by <ARTIST>".
  *
  * EXAMPLE:
- *  getAverageIMDBRating(movies);
- *  //> 7.76
+ *  getSongDetails(songs);
+ *  //> [ "Berlin Tsukin by Taiyo Ky", "Up by Sebastian Kamae", ... ]
  */
-const getAverageIMDBRating = (movies) => {
-  const sum = movies.reduce(
-    (total, movie) => total + Number(movie.imdbRating),
-    0
-  );
-
-  return sum / movies.length || 0;
-};
+function getSongDetails(songs) {}
 
 /**
- * countByRating()
- * -----------------------------
- * Returns an object where the keys are movie ratings and the values are the number of movies in the array with that rating. If the inputted `movies` array is empty, return `{}`.
- * @param {Object[]} movies - An array of movies. See the `movies.js` file for an example of this array.
- * @returns {Object} An object where keys are movie ratings (e.g. "PG") and the values are how many movies in the array have that rating (e.g. 7).
+ * Returns an array of objects, where each object has a key that is the song title and has a value that is the song artist.
+ * @param {Object[]} songs - An array of songs. See the song data for more.
+ * @returns {Object[]} An array of objects.
  *
  * EXAMPLE:
- *  countByRating(movies);
- *  //> { G: 3, PG: 7 }
+ *  getTitleAndArtist(songs);
+ *  //> [ { "Berlin Tsukin": "Taiyo Ky" }, { Up: "Sebastian Kamae" }, ... ]
  */
-const countByRating = (movies) => {
-  return movies.reduce(
-    (ratings, movie) => ({
-      ...ratings,
-      [movie.rated]: ratings[movie.rated] + 1 || 1,
-    }),
-    {}
-  );
-};
-
-/**
- * getBiggestBoxOfficeMovie()
- * -----------------------------
- * Returns the name of the movie with the highest `boxOffice` amount.
- * @param {Object[]} movies - An array of movies. See the `movies.js` file for an example of this array.
- * @returns {string} The name of the movie that made the most money at the box office.
- *
- * EXAMPLE:
- *  getBiggestBoxOfficeMovie(movies);
- *  //> "Incredibles 2"
- */
-const convertBoxOfficeToNumber = (movie) => {
-  return Number(movie.boxOffice.replaceAll("$", "").replaceAll(",", ""));
-};
-
-function getBiggestBoxOfficeMovie(movies) {
-  const biggestBoxOfficeMovie = movies.reduce(
-    (biggest, movie) =>
-      convertBoxOfficeToNumber(movie) > convertBoxOfficeToNumber(biggest)
-        ? movie
-        : biggest,
-    movies[0]
-  );
-
-  return biggestBoxOfficeMovie ? biggestBoxOfficeMovie.title : null;
-}
-
+function getTitleAndArtist(songs) {}
 
 /**
  * FIND PROBLEMS
  */
+
+/**
+ * Returns the song "Pink Elephants" from the song array, if it is in the array.
+ * @param {Object[]} songs - An array of songs. See the song data for more.
+ * @returns {Object} A single object.
+ */
+function findPinkElephantsByTimestreet(songs) {}
+
+/**
+ * Returns the first song in the list that is under three minutes.
+ * @param {Object[]} songs - An array of songs. See the song data for more.
+ * @returns {Object} A single object.
+ */
+function findFirstSongUnderThreeMinutes(songs) {}
+
+/**
+ * Returns the first song in the list where the song title equals the song album.
+ * @param {Object[]} songs - An array of songs. See the song data for more.
+ * @returns {Object} A single object.
+ */
+function findFirstTitleTrack(songs) {}
 
 /**
  * findById()
@@ -154,14 +103,32 @@ function getBiggestBoxOfficeMovie(movies) {
       // Toy Story 4
     };
  */
-const findById = (movies, id) => {
-  return movies.find((movie) => movie.imdbID === id) || null;
-};
+function findById(movies, id) {}
 
 /**
  * FILTER PROBLEMS
  */
 
+/**
+ * Returns an array of all songs by the artist "Saib".
+ * @param {Object[]} songs - An array of songs. See the song data for more.
+ * @returns {Object[]} An array of objects.
+ */
+function getSongsBySaib(songs) {}
+
+/**
+ * Returns an array of all songs where the runtime is over three minutes.
+ * @param {Object[]} songs - An array of songs. See the song data for more.
+ * @returns {Object[]} An array of objects.
+ */
+function getSongsOverThreeMinutes(songs) {}
+
+/**
+ * Returns an array of songs where the song title is the same as the song album.
+ * @param {Object[]} songs - An array of songs. See the song data for more.
+ * @returns {Object[]} An array of objects.
+ */
+function getTitleTracks(songs) {}
 /**
  * filterByGenre()
  * -----------------------------
@@ -182,11 +149,7 @@ const findById = (movies, id) => {
  *  filterByGenre(movies, "Horror")
  *  //> []
  */
-const filterByGenre = (movies, genre) => {
-  return movies.filter((movie) => {
-    return movie.genre.toLowerCase().includes(genre.toLowerCase());
-  });
-};
+function filterByGenre(movies, genre) {}
 // const answer = [];
 // for (let i = 0; i < movies.length; i++) {
 //   if (
@@ -220,12 +183,105 @@ const filterByGenre = (movies, genre) => {
       }
     ];
  */
-const getAllMoviesReleasedAtOrBeforeYear = (movies, year) => {
-  return movies.filter((movie) => Number(movie.released.slice(-4)) <= year);
-};
+function getAllMoviesReleasedAtOrBeforeYear(movies, year) {}
+
+/*
+ * REDUCE PROBLEMS
+ */
+
+/**
+ * getHighestMetascore()
+ * -----------------------------
+ * Returns the highest `metascore` among all movies. If the inputted `movies` array is empty, return `0`.
+ * @param {Object[]} movies - An array of movies. See the `movies.js` file for an example of this array.
+ * @returns {number} The highest `metascore` of all movies.
+ *
+ * EXAMPLE:
+ *  getHighestMetascore(movies);
+ *  //> 96
+ */
+function getHighestMetascore(movies) {}
+
+/**
+ * getAverageIMDBRating()
+ * -----------------------------
+ * Averages all of the IMDB ratings from all movies and returns it, as a number. If the inputted `movies` array is empty, return `0`.
+ * @param {Object[]} movies - An array of movies. See the `movies.js` file for an example of this array.
+ * @returns {number} The average IMDB rating across all movies.
+ *
+ * EXAMPLE:
+ *  getAverageIMDBRating(movies);
+ *  //> 7.76
+ */
+function getAverageIMDBRating(movies) {}
+
+/**
+ * countByRating()
+ * -----------------------------
+ * Returns an object where the keys are movie ratings and the values are the number of movies in the array with that rating. If the inputted `movies` array is empty, return `{}`.
+ * @param {Object[]} movies - An array of movies. See the `movies.js` file for an example of this array.
+ * @returns {Object} An object where keys are movie ratings (e.g. "PG") and the values are how many movies in the array have that rating (e.g. 7).
+ *
+ * EXAMPLE:
+ *  countByRating(movies);
+ *  //> { G: 3, PG: 7 }
+ */
+function countByRating(movies) {}
+
+/**
+ * getBiggestBoxOfficeMovie()
+ * -----------------------------
+ * Returns the name of the movie with the highest `boxOffice` amount.
+ * @param {Object[]} movies - An array of movies. See the `movies.js` file for an example of this array.
+ * @returns {string} The name of the movie that made the most money at the box office.
+ *
+ * EXAMPLE:
+ *  getBiggestBoxOfficeMovie(movies);
+ *  //> "Incredibles 2"
+ */
+function convertBoxOfficeToNumber(movie) {}
+
+function getBiggestBoxOfficeMovie(movies) {}
+
+/**
+ * SOME/EVERY PROBLEMS
+ */
+
+/**
+ * Returns `true` if every song is over two minutes. Otherwise, return `false`.
+ * @param {Object[]} songs - An array of songs. See the song data for more.
+ * @returns {boolean}
+ */
+function allSongsAreOverTwoMinutes(songs) {}
+
+/**
+ * Returns `true` if any song is over four minutes. Otherwise, return `false`.
+ * @param {Object[]} songs - An array of songs. See the song data for more.
+ * @returns {boolean}
+ */
+function anySongIsOverFourMinutes(songs) {}
+
+/**
+ * Returns `true` if any song is by the artist "Peanut". Otherwise, return `false`.
+ * @param {Object[]} songs - An array of songs. See the song data for more.
+ * @returns {boolean}
+ */
+function anySongIsByPeanut(songs) {}
 
 // Do not change anything below this line.
 module.exports = {
+  findPinkElephantsByTimestreet,
+  findFirstSongUnderThreeMinutes,
+  findFirstTitleTrack,
+  allSongsAreOverTwoMinutes,
+  anySongIsOverFourMinutes,
+  anySongIsByPeanut,
+  getSongTitles,
+  getSongDetails,
+  getTitleAndArtist,
+  getSongsBySaib,
+  getSongsOverThreeMinutes,
+  getTitleTracks,
   getAllMovieTitles,
   getHighestMetascore,
   getAverageIMDBRating,
