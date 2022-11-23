@@ -33,15 +33,16 @@ const exampleSongData = require("./data/songs");
       "James and the Giant Peach",
     ];
  */
+
 const getAllMovieTitles = (movies) => {
-  if( !movies.length ){ 
-    return []
-    throw ERROR
+  if ( !movies.length ) { 
+    return []   // to pass all test - have to return []
+    throw ERROR // either throw error or return [] - cant do both
   }
     
-  try{
-    return movies.map(movie => movie.title)
-  } catch( ERROR ) {
+  try {             // using try... catch for practice
+    return movies.map(movie => movie.title) // map to return all movie titles
+  } catch ( ERROR ) {
      console.log(ERROR)
   }
 }
@@ -51,7 +52,8 @@ const getAllMovieTitles = (movies) => {
  * @param {Object[]} songs - An array of songs. See the song data for more.
  * @returns {string[]} An array of strings, all of which are song titles.
  */
-const getSongTitles = (songs) => songs.map(song => song.title)
+
+const getSongTitles = (songs) => songs.map(song => song.title) // map to return song titles
 
 /**
  * Returns an array of all of the song titles with the artist.
@@ -62,7 +64,9 @@ const getSongTitles = (songs) => songs.map(song => song.title)
  *  getSongDetails(songs);
  *  //> [ "Berlin Tsukin by Taiyo Ky", "Up by Sebastian Kamae", ... ]
  */
-function getSongDetails(songs) {}
+
+const getSongDetails = (songs) => songs.map(song => `${song.title} by ${song.artist}`) // map to return song title and artist
+                                  
 
 /**
  * Returns an array of objects, where each object has a key that is the song title and has a value that is the song artist.
@@ -73,8 +77,9 @@ function getSongDetails(songs) {}
  *  getTitleAndArtist(songs);
  *  //> [ { "Berlin Tsukin": "Taiyo Ky" }, { Up: "Sebastian Kamae" }, ... ]
  */
-function getTitleAndArtist(songs) {}
 
+const getTitleAndArtist = (songs) => songs.map(song => ({ [ song.title ] : song.artist })) // map to return as array of objects
+                                     
 /**
  * FIND PROBLEMS
  */
