@@ -121,7 +121,7 @@ const findFirstTitleTrack = (songs) => songs.find(song => song.title === song.al
       // Toy Story 4
     };
  */
-const findById = (movies, id) => movies.find(movie => movie.imdbID === id)
+const findById = (movies, id) => movies.find(movie => movie.imdbID === id) || null
 
 /**
  * FILTER PROBLEMS
@@ -150,7 +150,8 @@ const getTitleTracks = (songs) => songs.filter(song => song.title === song.album
 /**
  * filterByGenre()
  * -----------------------------
- * Returns all movie objects with a matching genre. Case-insensitive. If the inputted `movies` array is empty or no movies match the inputted `genre`, return `[]`.
+ * Returns all movie objects with a matching genre. Case-insensitive. If the inputted `movies` array is empty 
+ * or no movies match the inputted `genre`, return `[]`.
  * @param {Object[]} movies - An array of movies. See the `movies.js` file for an example of this array.
  * @param {string} genre - The genre of a movie. (e.g. "Fantasy")
  * @returns {Object[]} An array of movies where at least one of the genres matches the `genre` inputted.
@@ -167,7 +168,7 @@ const getTitleTracks = (songs) => songs.filter(song => song.title === song.album
  *  filterByGenre(movies, "Horror")
  *  //> []
  */
-function filterByGenre(movies, genre) {}
+const filterByGenre = (movies, genre) => movies.filter(movie => movie.genre.toLowerCase().includes(genre.toLowerCase())) || []
 // const answer = [];
 // for (let i = 0; i < movies.length; i++) {
 //   if (
@@ -201,7 +202,7 @@ function filterByGenre(movies, genre) {}
       }
     ];
  */
-function getAllMoviesReleasedAtOrBeforeYear(movies, year) {}
+const getAllMoviesReleasedAtOrBeforeYear = (movies, year) => movies.filter(movie => movie.released.slice(-4) <= year) || []
 
 /*
  * REDUCE PROBLEMS
@@ -218,8 +219,15 @@ function getAllMoviesReleasedAtOrBeforeYear(movies, year) {}
  *  getHighestMetascore(movies);
  *  //> 96
  */
-function getHighestMetascore(movies) {}
 
+
+ const getHighestMetascore = (movies) => movies.reduce((accumulator, currentMovie) => Math.max(accumulator, Number(currentMovie.metascore)), 0);
+  //  {
+  //   if(!movies.length) { return 0 }
+  //   return movies.reduce((accumulator,currentMovie) => accumulator > Number(currentMovie.metascore) ? accumulator : Number(currentMovie.metascore))
+  //  }
+
+ 
 /**
  * getAverageIMDBRating()
  * -----------------------------
@@ -231,12 +239,13 @@ function getHighestMetascore(movies) {}
  *  getAverageIMDBRating(movies);
  *  //> 7.76
  */
-function getAverageIMDBRating(movies) {}
+const getAverageIMDBRating = (movies) => movies.reduce((accumulator,currentMovie) => accumulator + Number(currentMovie.imdbRating), 0 ) / movies.length || 0
 
 /**
  * countByRating()
  * -----------------------------
- * Returns an object where the keys are movie ratings and the values are the number of movies in the array with that rating. If the inputted `movies` array is empty, return `{}`.
+ * Returns an object where the keys are movie ratings and the values are the number of movies in the array with that rating. 
+ * If the inputted `movies` array is empty, return `{}`.
  * @param {Object[]} movies - An array of movies. See the `movies.js` file for an example of this array.
  * @returns {Object} An object where keys are movie ratings (e.g. "PG") and the values are how many movies in the array have that rating (e.g. 7).
  *
@@ -244,7 +253,8 @@ function getAverageIMDBRating(movies) {}
  *  countByRating(movies);
  *  //> { G: 3, PG: 7 }
  */
-function countByRating(movies) {}
+ const countByRating = (movies) => movies.reduce((accumulator,currentMovie) => (accumulator[currentMovie.rated] ? accumulator[currentMovie.rated] ++ : accumulator[currentMovie.rated] = 1, accumulator),{})
+
 
 /**
  * getBiggestBoxOfficeMovie()
@@ -257,9 +267,10 @@ function countByRating(movies) {}
  *  getBiggestBoxOfficeMovie(movies);
  *  //> "Incredibles 2"
  */
-function convertBoxOfficeToNumber(movie) {}
-
-function getBiggestBoxOfficeMovie(movies) {}
+ const convertBoxOfficeToNumber = (boxOffice) => Number(boxOffice.replace('$',"").replaceAll('.',''))
+                                                         
+ const getBiggestBoxOfficeMovie = (movies) => movies.reduce((accumulator, currentMovie) => Math.max(accumulator, convertBoxOfficeToNumber(currentMovie.boxOffice), 0),null)
+                                                                                                           
 
 /**
  * SOME/EVERY PROBLEMS
