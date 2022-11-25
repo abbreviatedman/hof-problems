@@ -64,7 +64,7 @@ describe("getSongDetails()", () => {
   });
 });
 
-describe.only("getTitleAndArtist()", () => {
+describe("getTitleAndArtist()", () => {
   let songs;
   beforeEach(() => {
     jest.resetModules();

@@ -30,7 +30,7 @@ describe("findPinkElephantsByTimestreet()", () => {
   });
 });
 
-describe.only("findFirstSongUnderThreeMinutes()", () => {
+describe("findFirstSongUnderThreeMinutes()", () => {
   let songs;
   beforeEach(() => {
     jest.resetModules();
@@ -56,7 +56,7 @@ describe.only("findFirstSongUnderThreeMinutes()", () => {
   });
 });
 
-describe.only("findFirstTitleTrack()", () => {
+describe("findFirstTitleTrack()", () => {
   let songs;
   beforeEach(() => {
     jest.resetModules();

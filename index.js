@@ -144,21 +144,30 @@ function findById(movies, id) {
  * @param {Object[]} songs - An array of songs. See the song data for more.
  * @returns {Object[]} An array of objects.
  */
-function getSongsBySaib(songs) {}
+function getSongsBySaib(songs) {
+  let arr = songs.filter(song => song.artist === "Saib");
+  return arr;
+}
 
 /**
  * Returns an array of all songs where the runtime is over three minutes.
  * @param {Object[]} songs - An array of songs. See the song data for more.
  * @returns {Object[]} An array of objects.
  */
-function getSongsOverThreeMinutes(songs) {}
+function getSongsOverThreeMinutes(songs) {
+  let arr = songs.filter(song => song.runtimeInSeconds > 180);
+  return arr; 
+}
 
 /**
  * Returns an array of songs where the song title is the same as the song album.
  * @param {Object[]} songs - An array of songs. See the song data for more.
  * @returns {Object[]} An array of objects.
  */
-function getTitleTracks(songs) {}
+function getTitleTracks(songs) {
+  let arr = songs.filter(song => song.title === song.album);
+  return arr; 
+}
 /**
  * filterByGenre()
  * -----------------------------
@@ -179,17 +188,12 @@ function getTitleTracks(songs) {}
  *  filterByGenre(movies, "Horror")
  *  //> []
  */
-function filterByGenre(movies, genre) {}
-// const answer = [];
-// for (let i = 0; i < movies.length; i++) {
-//   if (
-//     movies[i].genre.toLowerCase().split(", ").includes(genre.toLowerCase())
-//   ) {
-//     answer.push(movies[i]);
-//   }
-// }
-
-// return answer;
+function filterByGenre(movies, genre) {
+let arr = [];
+ arr = movies.filter(movie => 
+movie.genre.toLowerCase().split(", ").includes(genre.toLowerCase()));
+return arr;
+}
 
 /**
  * getAllMoviesReleasedAtOrBeforeYear()
@@ -213,7 +217,11 @@ function filterByGenre(movies, genre) {}
       }
     ];
  */
-function getAllMoviesReleasedAtOrBeforeYear(movies, year) {}
+function getAllMoviesReleasedAtOrBeforeYear(movies, year) {
+let arr = movies.filter(movie => 
+  Number(movie.released.split(" ")[2])<= year);
+  return arr;
+}
 
 /*
  * REDUCE PROBLEMS
