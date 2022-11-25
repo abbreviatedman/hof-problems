@@ -146,7 +146,7 @@ const getSongsOverThreeMinutes = (songs) => songs.filter(song => song.runtimeInS
  * @param {Object[]} songs - An array of songs. See the song data for more.
  * @returns {Object[]} An array of objects.
  */
-function getTitleTracks(songs) {}
+const getTitleTracks = (songs) => songs.filter(song => song.title === song.album)
 /**
  * filterByGenre()
  * -----------------------------
