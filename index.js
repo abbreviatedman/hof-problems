@@ -4,6 +4,7 @@
   Keep in mind that your functions must still have and use a parameter for accepting all movies or songs.
 */
 const exampleMovies = require("./data/movies");
+const songs = require("./data/songs");
 const exampleSongData = require("./data/songs");
 // Do not change the lines above.
 
@@ -89,21 +90,22 @@ const getTitleAndArtist = (songs) => songs.map(song => ({ [ song.title ] : song.
  * @param {Object[]} songs - An array of songs. See the song data for more.
  * @returns {Object} A single object.
  */
-function findPinkElephantsByTimestreet(songs) {}
+const findPinkElephantsByTimestreet = (songs) => songs.find(song => song.title === 'Pink Elephants')
 
 /**
  * Returns the first song in the list that is under three minutes.
  * @param {Object[]} songs - An array of songs. See the song data for more.
  * @returns {Object} A single object.
  */
-function findFirstSongUnderThreeMinutes(songs) {}
+const findFirstSongUnderThreeMinutes = (songs) => songs.find(song => song.runtimeInSeconds < 180)
 
 /**
  * Returns the first song in the list where the song title equals the song album.
  * @param {Object[]} songs - An array of songs. See the song data for more.
  * @returns {Object} A single object.
  */
-function findFirstTitleTrack(songs) {}
+
+const findFirstTitleTrack = (songs) => songs.find(song => song.title === song.album)
 
 /**
  * findById()
@@ -119,7 +121,7 @@ function findFirstTitleTrack(songs) {}
       // Toy Story 4
     };
  */
-function findById(movies, id) {}
+const findById = (movies, id) => movies.find(movie => movie.imdbID === id)
 
 /**
  * FILTER PROBLEMS
