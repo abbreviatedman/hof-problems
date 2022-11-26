@@ -4,6 +4,7 @@
   Keep in mind that your functions must still have and use a parameter for accepting all movies or songs.
 */
 const exampleMovies = require("./data/movies");
+const songs = require("./data/songs");
 const exampleSongData = require("./data/songs");
 // Do not change the lines above.
 
@@ -33,14 +34,27 @@ const exampleSongData = require("./data/songs");
       "James and the Giant Peach",
     ];
  */
-function getAllMovieTitles(movies) {}
+
+const getAllMovieTitles = (movies) => {
+  if ( !movies.length ) { 
+    return []   // to pass all test - have to return []
+    throw ERROR // either throw error or return [] - cant do both
+  }
+    
+  try {             // using try... catch for practice
+    return movies.map(movie => movie.title) // map to return all movie titles
+  } catch ( ERROR ) {
+     console.log(ERROR)
+  }
+}
 
 /**
  * Returns an array of all of the song titles.
  * @param {Object[]} songs - An array of songs. See the song data for more.
  * @returns {string[]} An array of strings, all of which are song titles.
  */
-function getSongTitles(songs) {}
+
+const getSongTitles = (songs) => songs.map(song => song.title) // map to return song titles
 
 /**
  * Returns an array of all of the song titles with the artist.
@@ -51,7 +65,9 @@ function getSongTitles(songs) {}
  *  getSongDetails(songs);
  *  //> [ "Berlin Tsukin by Taiyo Ky", "Up by Sebastian Kamae", ... ]
  */
-function getSongDetails(songs) {}
+
+const getSongDetails = (songs) => songs.map(song => `${song.title} by ${song.artist}`) // map to return song title and artist
+                                  
 
 /**
  * Returns an array of objects, where each object has a key that is the song title and has a value that is the song artist.
@@ -62,8 +78,9 @@ function getSongDetails(songs) {}
  *  getTitleAndArtist(songs);
  *  //> [ { "Berlin Tsukin": "Taiyo Ky" }, { Up: "Sebastian Kamae" }, ... ]
  */
-function getTitleAndArtist(songs) {}
 
+const getTitleAndArtist = (songs) => songs.map(song => ({ [ song.title ] : song.artist })) // map to return as array of objects
+                                     
 /**
  * FIND PROBLEMS
  */
@@ -73,21 +90,22 @@ function getTitleAndArtist(songs) {}
  * @param {Object[]} songs - An array of songs. See the song data for more.
  * @returns {Object} A single object.
  */
-function findPinkElephantsByTimestreet(songs) {}
+const findPinkElephantsByTimestreet = (songs) => songs.find(song => song.title === 'Pink Elephants')
 
 /**
  * Returns the first song in the list that is under three minutes.
  * @param {Object[]} songs - An array of songs. See the song data for more.
  * @returns {Object} A single object.
  */
-function findFirstSongUnderThreeMinutes(songs) {}
+const findFirstSongUnderThreeMinutes = (songs) => songs.find(song => song.runtimeInSeconds < 180)
 
 /**
  * Returns the first song in the list where the song title equals the song album.
  * @param {Object[]} songs - An array of songs. See the song data for more.
  * @returns {Object} A single object.
  */
-function findFirstTitleTrack(songs) {}
+
+const findFirstTitleTrack = (songs) => songs.find(song => song.title === song.album)
 
 /**
  * findById()
@@ -103,7 +121,7 @@ function findFirstTitleTrack(songs) {}
       // Toy Story 4
     };
  */
-function findById(movies, id) {}
+const findById = (movies, id) => movies.find(movie => movie.imdbID === id) || null
 
 /**
  * FILTER PROBLEMS
@@ -114,25 +132,26 @@ function findById(movies, id) {}
  * @param {Object[]} songs - An array of songs. See the song data for more.
  * @returns {Object[]} An array of objects.
  */
-function getSongsBySaib(songs) {}
+const getSongsBySaib = (songs) => songs.filter(song => song.artist === 'Saib')
 
 /**
  * Returns an array of all songs where the runtime is over three minutes.
  * @param {Object[]} songs - An array of songs. See the song data for more.
  * @returns {Object[]} An array of objects.
  */
-function getSongsOverThreeMinutes(songs) {}
+const getSongsOverThreeMinutes = (songs) => songs.filter(song => song.runtimeInSeconds > 180)
 
 /**
  * Returns an array of songs where the song title is the same as the song album.
  * @param {Object[]} songs - An array of songs. See the song data for more.
  * @returns {Object[]} An array of objects.
  */
-function getTitleTracks(songs) {}
+const getTitleTracks = (songs) => songs.filter(song => song.title === song.album)
 /**
  * filterByGenre()
  * -----------------------------
- * Returns all movie objects with a matching genre. Case-insensitive. If the inputted `movies` array is empty or no movies match the inputted `genre`, return `[]`.
+ * Returns all movie objects with a matching genre. Case-insensitive. If the inputted `movies` array is empty 
+ * or no movies match the inputted `genre`, return `[]`.
  * @param {Object[]} movies - An array of movies. See the `movies.js` file for an example of this array.
  * @param {string} genre - The genre of a movie. (e.g. "Fantasy")
  * @returns {Object[]} An array of movies where at least one of the genres matches the `genre` inputted.
@@ -149,7 +168,7 @@ function getTitleTracks(songs) {}
  *  filterByGenre(movies, "Horror")
  *  //> []
  */
-function filterByGenre(movies, genre) {}
+const filterByGenre = (movies, genre) => movies.filter(movie => movie.genre.toLowerCase().includes(genre.toLowerCase())) || []
 // const answer = [];
 // for (let i = 0; i < movies.length; i++) {
 //   if (
@@ -183,7 +202,7 @@ function filterByGenre(movies, genre) {}
       }
     ];
  */
-function getAllMoviesReleasedAtOrBeforeYear(movies, year) {}
+const getAllMoviesReleasedAtOrBeforeYear = (movies, year) => movies.filter(movie => movie.released.slice(-4) <= year) || []
 
 /*
  * REDUCE PROBLEMS
@@ -200,8 +219,15 @@ function getAllMoviesReleasedAtOrBeforeYear(movies, year) {}
  *  getHighestMetascore(movies);
  *  //> 96
  */
-function getHighestMetascore(movies) {}
 
+
+ const getHighestMetascore = (movies) => movies.reduce((accumulator, currentMovie) => Math.max(accumulator, Number(currentMovie.metascore)), 0);
+  //  {
+  //   if(!movies.length) { return 0 }
+  //   return movies.reduce((accumulator,currentMovie) => accumulator > Number(currentMovie.metascore) ? accumulator : Number(currentMovie.metascore))
+  //  }
+
+ 
 /**
  * getAverageIMDBRating()
  * -----------------------------
@@ -213,12 +239,13 @@ function getHighestMetascore(movies) {}
  *  getAverageIMDBRating(movies);
  *  //> 7.76
  */
-function getAverageIMDBRating(movies) {}
+const getAverageIMDBRating = (movies) => movies.reduce((accumulator,currentMovie) => accumulator + Number(currentMovie.imdbRating), 0 ) / movies.length || 0
 
 /**
  * countByRating()
  * -----------------------------
- * Returns an object where the keys are movie ratings and the values are the number of movies in the array with that rating. If the inputted `movies` array is empty, return `{}`.
+ * Returns an object where the keys are movie ratings and the values are the number of movies in the array with that rating. 
+ * If the inputted `movies` array is empty, return `{}`.
  * @param {Object[]} movies - An array of movies. See the `movies.js` file for an example of this array.
  * @returns {Object} An object where keys are movie ratings (e.g. "PG") and the values are how many movies in the array have that rating (e.g. 7).
  *
@@ -226,7 +253,8 @@ function getAverageIMDBRating(movies) {}
  *  countByRating(movies);
  *  //> { G: 3, PG: 7 }
  */
-function countByRating(movies) {}
+ const countByRating = (movies) => movies.reduce((accumulator,currentMovie) => (accumulator[currentMovie.rated] ? accumulator[currentMovie.rated] ++ : accumulator[currentMovie.rated] = 1, accumulator),{})
+
 
 /**
  * getBiggestBoxOfficeMovie()
@@ -239,34 +267,37 @@ function countByRating(movies) {}
  *  getBiggestBoxOfficeMovie(movies);
  *  //> "Incredibles 2"
  */
-function convertBoxOfficeToNumber(movie) {}
 
-function getBiggestBoxOfficeMovie(movies) {}
+ const convertBoxOfficeToNumber = (boxOffice) => Number(boxOffice.replace('$',"").replaceAll(',',''))
+                                                         
+ 
+ const getBiggestBoxOfficeMovie = (movies) => !movies.length ? null : movies.reduce( (accumulator, currentMovie) => convertBoxOfficeToNumber(accumulator.boxOffice) > convertBoxOfficeToNumber(currentMovie.boxOffice) ? accumulator : currentMovie).title
 
-/**
+ 
+ /**
  * SOME/EVERY PROBLEMS
  */
 
-/**
+ /**
  * Returns `true` if every song is over two minutes. Otherwise, return `false`.
  * @param {Object[]} songs - An array of songs. See the song data for more.
  * @returns {boolean}
  */
-function allSongsAreOverTwoMinutes(songs) {}
+ const allSongsAreOverTwoMinutes = (songs) => songs.every(song => song.runtimeInSeconds > 120)
 
-/**
+ /**
  * Returns `true` if any song is over four minutes. Otherwise, return `false`.
  * @param {Object[]} songs - An array of songs. See the song data for more.
  * @returns {boolean}
  */
-function anySongIsOverFourMinutes(songs) {}
+ const anySongIsOverFourMinutes = (songs) => songs.some(song => song.runtimeInSeconds > 240)
 
-/**
+ /**
  * Returns `true` if any song is by the artist "Peanut". Otherwise, return `false`.
  * @param {Object[]} songs - An array of songs. See the song data for more.
  * @returns {boolean}
  */
-function anySongIsByPeanut(songs) {}
+const anySongIsByPeanut = (songs) => songs.some(song => song.artist === 'Peanut')
 
 // Do not change anything below this line.
 module.exports = {
