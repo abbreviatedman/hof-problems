@@ -267,30 +267,32 @@ const getAverageIMDBRating = (movies) => movies.reduce((accumulator,currentMovie
  *  getBiggestBoxOfficeMovie(movies);
  *  //> "Incredibles 2"
  */
- const convertBoxOfficeToNumber = (boxOffice) => Number(boxOffice.replace('$',"").replaceAll('.',''))
-                                                         
- const getBiggestBoxOfficeMovie = (movies) => movies.reduce((accumulator, currentMovie) => Math.max(accumulator, convertBoxOfficeToNumber(currentMovie.boxOffice), 0),null)
-                                                                                                           
 
-/**
+ const convertBoxOfficeToNumber = (boxOffice) => Number(boxOffice.replace('$',"").replaceAll(',',''))
+                                                         
+ 
+ const getBiggestBoxOfficeMovie = (movies) => !movies.length ? null : movies.reduce( (accumulator, currentMovie) => convertBoxOfficeToNumber(accumulator.boxOffice) > convertBoxOfficeToNumber(currentMovie.boxOffice) ? accumulator : currentMovie).title
+
+ 
+ /**
  * SOME/EVERY PROBLEMS
  */
 
-/**
+ /**
  * Returns `true` if every song is over two minutes. Otherwise, return `false`.
  * @param {Object[]} songs - An array of songs. See the song data for more.
  * @returns {boolean}
  */
-const allSongsAreOverTwoMinutes = (songs) => songs.every(song => song.runtimeInSeconds > 120)
+ const allSongsAreOverTwoMinutes = (songs) => songs.every(song => song.runtimeInSeconds > 120)
 
-/**
+ /**
  * Returns `true` if any song is over four minutes. Otherwise, return `false`.
  * @param {Object[]} songs - An array of songs. See the song data for more.
  * @returns {boolean}
  */
-const anySongIsOverFourMinutes = (songs) => songs.some(song => song.runtimeInSeconds > 240)
+ const anySongIsOverFourMinutes = (songs) => songs.some(song => song.runtimeInSeconds > 240)
 
-/**
+ /**
  * Returns `true` if any song is by the artist "Peanut". Otherwise, return `false`.
  * @param {Object[]} songs - An array of songs. See the song data for more.
  * @returns {boolean}
