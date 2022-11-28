@@ -238,7 +238,17 @@ let arr = movies.filter(movie =>
  *  getHighestMetascore(movies);
  *  //> 96
  */
-function getHighestMetascore(movies) {}
+function getHighestMetascore(movies) {
+  if (movies.length === 0) {
+    return 0;
+  }
+  let initialValue = movies.reduce((highestScore, movie) => {
+    if (Number(movie.metascore) > Number(movies[0].metascore)) {
+      highestScore = Number(movie.metascore)
+    } return highestScore;
+  }, Number(movies[0].metascore));
+  return initialValue;
+}
 
 /**
  * getAverageIMDBRating()
@@ -251,7 +261,16 @@ function getHighestMetascore(movies) {}
  *  getAverageIMDBRating(movies);
  *  //> 7.76
  */
-function getAverageIMDBRating(movies) {}
+function getAverageIMDBRating(movies) {
+  let averageRating = 0;
+  if (movies.length === 0) {
+    return 0;
+  }
+  for (let movie of movies) {
+    averageRating += Number(movie.imdbRating);
+  }
+  return averageRating / movies.length;
+}
 
 /**
  * countByRating()
@@ -264,7 +283,17 @@ function getAverageIMDBRating(movies) {}
  *  countByRating(movies);
  *  //> { G: 3, PG: 7 }
  */
-function countByRating(movies) {}
+function countByRating(movies) {
+  let obj = {};
+  let arr = [];
+  for (let movie of movies) {
+    arr.push(movie.rated);
+  }
+  arr.forEach(element => {
+    obj[element] = (obj[element] || 0) + 1;
+  });
+  return obj;
+}
 
 /**
  * getBiggestBoxOfficeMovie()
@@ -277,9 +306,24 @@ function countByRating(movies) {}
  *  getBiggestBoxOfficeMovie(movies);
  *  //> "Incredibles 2"
  */
-function convertBoxOfficeToNumber(movie) {}
+function convertBoxOfficeToNumber(movie) {
+  return Number(movie.boxOffice.slice(1).replaceAll(',', ''))
+}
 
-function getBiggestBoxOfficeMovie(movies) {}
+function getBiggestBoxOfficeMovie(movies) {
+  let arr = [];
+  let index;
+  if (movies.length === 0) {
+    return null;
+  }
+  for (let movie of movies) {
+    arr.push(convertBoxOfficeToNumber(movie));
+  }
+  let biggest = Math.max(...arr);
+  index = arr.indexOf(biggest);
+  console.log(movies[index].title)
+  return movies[index].title;
+}
 
 /**
  * SOME/EVERY PROBLEMS
@@ -290,21 +334,27 @@ function getBiggestBoxOfficeMovie(movies) {}
  * @param {Object[]} songs - An array of songs. See the song data for more.
  * @returns {boolean}
  */
-function allSongsAreOverTwoMinutes(songs) {}
+function allSongsAreOverTwoMinutes(songs) {
+  return songs.every(song => song.runtimeInSeconds > 120);
+}
 
 /**
  * Returns `true` if any song is over four minutes. Otherwise, return `false`.
  * @param {Object[]} songs - An array of songs. See the song data for more.
  * @returns {boolean}
  */
-function anySongIsOverFourMinutes(songs) {}
+function anySongIsOverFourMinutes(songs) {
+  return songs.some(song => song.runtimeInSeconds > 240);
+}
 
 /**
  * Returns `true` if any song is by the artist "Peanut". Otherwise, return `false`.
  * @param {Object[]} songs - An array of songs. See the song data for more.
  * @returns {boolean}
  */
-function anySongIsByPeanut(songs) {}
+function anySongIsByPeanut(songs) {
+  return songs.some(song => song.artist === "Peanut");
+}
 
 // Do not change anything below this line.
 module.exports = {
